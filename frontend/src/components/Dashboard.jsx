@@ -3,7 +3,7 @@ import { useAuth } from '../App'
 import { Box, Flex, VStack, HStack, Text, Button, SimpleGrid } from '@chakra-ui/react'
 import { ArrowLeft, Download, Trash2, Image as ImageIcon, Share2, Check, FolderOpen, HardDrive, User, Images } from 'lucide-react'
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://imageprocessor-zypx.onrender.com'
 const API_URL = `${BASE_URL}/api/image`
 const SAVE_LIMIT = 3
 

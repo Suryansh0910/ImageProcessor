@@ -22,7 +22,7 @@ function App() {
         return
       }
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/auth/verify`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://imageprocessor-zypx.onrender.com'}/api/auth/verify`, {
           headers: { 'Authorization': `Bearer ${token}` }
         })
         if (response.ok) {
