@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useAuth } from '../App'
-import { Box, VStack, Heading, Text, Input, Button, Link, HStack, Flex } from '@chakra-ui/react'
+import { Box, VStack, Heading, Text, Input, Button, Link, HStack, Flex, Spinner } from '@chakra-ui/react'
 import { AlertCircle, Mail, Lock, Eye, EyeOff, User, Check, Save, Share2, Download } from 'lucide-react'
 
 function Signup({ onToggle }) {
@@ -25,6 +25,7 @@ function Signup({ onToggle }) {
         }
 
         setLoading(true)
+        await new Promise(r => setTimeout(r, 50))
         try {
             const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://imageprocessor-zypx.onrender.com'}/api/auth/signup`, {
                 method: 'POST',
@@ -43,7 +44,29 @@ function Signup({ onToggle }) {
     const features = ['Resize & Crop', '8+ Filters', 'Remove Background', 'Rotate & Convert', 'Format Convert', 'Share Links']
 
     return (
-        <Box minH="100vh" bg="#000" display="flex" alignItems="center" justifyContent="center" p={4}>
+        <Box minH="100vh" bg="#000" display="flex" alignItems="center" justifyContent="center" p={4} position="relative">
+
+            {loading && (
+                <Box
+                    position="fixed"
+                    top={0}
+                    left={0}
+                    right={0}
+                    bottom={0}
+                    bg="rgba(0,0,0,0.7)"
+                    backdropFilter="blur(8px)"
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                    justifyContent="center"
+                    zIndex={9999}
+                    gap={4}
+                >
+                    <Spinner size="xl" color="white" thickness="4px" />
+                    <Text color="white" fontSize="lg" fontWeight="600">Creating Account...</Text>
+                </Box>
+            )}
+
             <Flex gap={0} w="full" maxW="1100px">
 
                 <Box flex={1} bg="#050505" p={8} borderRadius="xl 0 0 xl" border="1px solid #222" borderRight="none" display={{ base: 'none', md: 'flex' }}>
@@ -105,7 +128,7 @@ function Signup({ onToggle }) {
                             </Box>
                         </VStack>
 
-                        <Button type="submit" w="full" h="44px" bg="white" color="black" fontWeight="500" isLoading={loading}>Create Account</Button>
+                        <Button type="submit" w="full" h="44px" bg="white" color="black" fontWeight="500">Create Account</Button>
                         <Text color="#666" fontSize="sm">Have an account? <Link color="white" onClick={onToggle}>Sign in</Link></Text>
                     </VStack>
                 </Box>

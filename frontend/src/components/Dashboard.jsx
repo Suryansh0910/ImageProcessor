@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../App'
-import { Box, Flex, VStack, HStack, Text, Button, SimpleGrid } from '@chakra-ui/react'
+import { Box, Flex, VStack, HStack, Text, Button, SimpleGrid, Spinner } from '@chakra-ui/react'
 import { ArrowLeft, Download, Trash2, Image as ImageIcon, Share2, Check, FolderOpen, HardDrive, User, Images } from 'lucide-react'
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'https://imageprocessor-zypx.onrender.com'
@@ -127,7 +127,7 @@ function Gallery() {
                     <Text color="white" fontSize="lg" fontWeight="600" mb={6}>Your Collection ({images.length})</Text>
 
                     {loading ? (
-                        <Flex justify="center" py={16}><Text color="#555">Loading...</Text></Flex>
+                        <Flex justify="center" py={16}><Spinner size="xl" color="white" /></Flex>
                     ) : images.length === 0 ? (
                         <Flex direction="column" align="center" justify="center" h="calc(100vh - 180px)" bg="#0a0a0a" border="1px dashed #1a1a1a" borderRadius="xl">
                             <Box bg="#111" p={5} borderRadius="xl" mb={4}><ImageIcon size={32} color="#333" /></Box>

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useAuth } from '../App'
-import { Box, Flex, VStack, HStack, Text, Button, Input, SimpleGrid } from '@chakra-ui/react'
+import { Box, Flex, VStack, HStack, Text, Button, Input, SimpleGrid, Spinner } from '@chakra-ui/react'
 import { Image, Upload, Maximize, Crop, Palette, Settings, Save, Download, RotateCcw, AlertCircle, Grid3X3, Eraser, Check, Aperture, Sliders, Images } from 'lucide-react'
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'https://imageprocessor-zypx.onrender.com'
@@ -47,9 +47,11 @@ function ImageProcessor() {
     const apiCall = async (url, method = 'POST', body = null) => {
         setLoading(true)
         setError('')
+        await new Promise(r => setTimeout(r, 50))
         try {
             const options = { method, headers: { 'Content-Type': 'application/json' } }
             if (body) options.body = JSON.stringify(body)
+
             const res = await fetch(url, options)
             const data = await res.json()
             if (!res.ok) throw new Error(data.message)
@@ -85,6 +87,7 @@ function ImageProcessor() {
         formData.append('image', file)
 
         setLoading(true)
+        await new Promise(r => setTimeout(r, 50))
         try {
             const res = await fetch(`${API_URL}/upload`, { method: 'POST', body: formData })
             const data = await res.json()
@@ -442,6 +445,15 @@ function ImageProcessor() {
                                 {error && (
                                     <Box position="absolute" top={4} left="50%" transform="translateX(-50%)" bg="#220000" border="1px solid #440000" borderRadius="md" px={4} py={2} color="#ff4444" zIndex={10}>
                                         <HStack><AlertCircle size={14} /><Text fontSize="sm">{error}</Text></HStack>
+                                    </Box>
+                                )}
+
+                                {loading && (
+                                    <Box position="absolute" inset={0} bg="rgba(0,0,0,0.8)" display="flex" alignItems="center" justifyContent="center" zIndex={20}>
+                                        <VStack gap={4}>
+                                            <Spinner size="xl" color="white" thickness="3px" />
+                                            <Text color="white" fontSize="sm" fontWeight="500">Processing...</Text>
+                                        </VStack>
                                     </Box>
                                 )}
 
