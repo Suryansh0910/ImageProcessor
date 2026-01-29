@@ -26,15 +26,4 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-// Don't return password in queries
-userSchema.set("toJSON", {
-    transform: (doc, ret) => {
-        delete ret.password;
-        delete ret.__v;
-        ret.id = ret._id;
-        delete ret._id;
-        return ret;
-    }
-});
-
 module.exports = mongoose.model("User", userSchema);

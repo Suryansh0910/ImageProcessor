@@ -13,7 +13,7 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem('token'))
   const [isLogin, setIsLogin] = useState(true)
   const [loading, setLoading] = useState(true)
-  const [currentPage, setCurrentPage] = useState('processor') // processor, gallery
+  const [currentPage, setCurrentPage] = useState('processor')
 
   useEffect(() => {
     const verifyToken = async () => {

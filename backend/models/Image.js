@@ -33,14 +33,14 @@ const imageSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Image"
     },
-    operation: String, // resize, filter, compress, etc.
+    operation: String, 
     createdAt: {
         type: Date,
         default: Date.now
     }
 });
 
-// Index for fast user queries
+
 imageSchema.index({ userId: 1, createdAt: -1 });
 
 module.exports = mongoose.model("Image", imageSchema);
