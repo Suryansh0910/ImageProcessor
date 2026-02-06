@@ -399,7 +399,7 @@ function ImageProcessor() {
                                                 <Text color="white" fontSize="sm" fontWeight="500">Remove Background</Text>
                                                 <Text color="#666" fontSize="xs">Works best with solid color backgrounds</Text>
                                                 <Button {...btnStyle} onClick={handleRemoveBg} isLoading={loading}>Remove Background</Button>
-                                            </>
+                                                       </>
                                         )}
                                     </VStack>
                                 </Box>
