@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useAuth } from '../App'
 import { Box, Flex, VStack, HStack, Text, Button, Input, SimpleGrid, Spinner } from '@chakra-ui/react'
-import { Image, Upload, Maximize, Crop, Palette, Settings, Save, Download, RotateCcw, AlertCircle, Grid3X3, Eraser, Check, Aperture, Sliders, Images } from 'lucide-react'
+import { Upload, Maximize, Crop, Palette, Settings, Save, Download, RotateCcw, AlertCircle, Eraser, Check, Sliders, Images } from 'lucide-react'
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'https://imageprocessor-zypx.onrender.com'
 const API_URL = `${BASE_URL}/api/image`
