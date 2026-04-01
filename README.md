@@ -1,8 +1,8 @@
-# 📷 ImageProcessor
+# ImageProcessor
 
 A fully-featured, high-performance web application for professional image editing directly in your browser. Whether you need to quickly resize, crop, filter, or remove backgrounds, ImageProcessor offers a comprehensive suite of tools packed into a dark, sleek, and minimalist UI.
 
-## 🌟 Features Implemented
+## Features Implemented
 
 * **Secure Authentication:** Full JWT-auth protected endpoints with custom Login and Signup pages routing through React Router.
 * **Complete Editing Suite:** Rotate, crop (with presets constraint logic), resize, and format conversion.
@@ -13,7 +13,7 @@ A fully-featured, high-performance web application for professional image editin
 
 ---
 
-## 📸 Application Previews
+## Application Previews
 
 ### 1. Robust Account & Security Flow
 *Features modern login UI components, comprehensive validations, and a smooth UX using custom toggle states.*
@@ -37,7 +37,7 @@ A fully-featured, high-performance web application for professional image editin
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 * **Frontend Engine:** React 19 + Vite (Ultra Fast HMR)
 * **Routing:** React Router v7
@@ -45,7 +45,7 @@ A fully-featured, high-performance web application for professional image editin
 * **Icons:** Lucide React
 * **Backend:** Node.js, Express, MongoDB (Mongoose)
 
-## 🚀 Getting Started
+## Getting Started
 
 1. Set up the environment variables (e.g., `VITE_API_URL` for frontend).
 2. Start the Backend API.
