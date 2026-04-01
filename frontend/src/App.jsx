@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext, useContext } from 'react'
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { Spinner, Center, Box } from '@chakra-ui/react'
 import Login from './components/Login'
 import Signup from './components/Signup'
@@ -8,12 +9,33 @@ import ImageProcessor from './components/ImageProcessor'
 const AuthContext = createContext(null)
 export const useAuth = () => useContext(AuthContext)
 
+function AuthContainer() {
+  const { user } = useAuth()
+  const [isLogin, setIsLogin] = useState(true)
+
+  if (user) return <Navigate to="/" replace />
+
+  return isLogin ? (
+    <Login onToggle={() => setIsLogin(false)} />
+  ) : (
+    <Signup onToggle={() => setIsLogin(true)} />
+  )
+}
+
+function MainContainer() {
+  const { user, currentPage } = useAuth()
+  
+  if (!user) return <Navigate to="/auth" replace />
+
+  return currentPage === 'gallery' ? <Gallery /> : <ImageProcessor />
+}
+
 function App() {
   const [user, setUser] = useState(null)
   const [token, setToken] = useState(localStorage.getItem('token'))
-  const [isLogin, setIsLogin] = useState(true)
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState('processor')
+  const navigate = useNavigate()
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -45,12 +67,14 @@ function App() {
     setUser(userData)
     setToken(authToken)
     localStorage.setItem('token', authToken)
+    navigate('/')
   }
 
   const logout = () => {
     setUser(null)
     setToken(null)
     localStorage.removeItem('token')
+    navigate('/auth')
   }
 
   if (loading) {
@@ -64,13 +88,11 @@ function App() {
   return (
     <AuthContext.Provider value={{ user, token, login, logout, currentPage, setCurrentPage }}>
       <Box bg="#0a0a0a" minH="100vh" color="white">
-        {user ? (
-          currentPage === 'gallery' ? <Gallery /> : <ImageProcessor />
-        ) : isLogin ? (
-          <Login onToggle={() => setIsLogin(false)} />
-        ) : (
-          <Signup onToggle={() => setIsLogin(true)} />
-        )}
+        <Routes>
+          <Route path="/auth" element={<AuthContainer />} />
+          <Route path="/" element={<MainContainer />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </Box>
     </AuthContext.Provider>
   )
